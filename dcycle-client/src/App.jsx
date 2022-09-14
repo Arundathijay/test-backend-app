@@ -68,22 +68,28 @@ function App() {
   // }
   return (
     <div className='App'>
-      <form onSubmit={handleSubmit}>
-        <input
-          type='text'
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <button type='submit'>Submit</button>
-      </form>
-      <div>Name: {userName}</div>
-      <div>Age: {userAge}</div>
-      <div>
-        Country:{" "}
-        {userCountry &&
-          userCountry.map((countryCode, i) => (
-            <li key={i}>{countryCode.country_id}</li>
-          ))}
+      <div className='search-form'>
+        <form onSubmit={handleSubmit}>
+          <input
+            type='text'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <button className='btn-submit' type='submit'>
+            Submit
+          </button>
+        </form>
+      </div>
+      <div className='search-info'>
+        <div className='search-name'>Name: {userName}</div>
+        <div className='search-age'>Age: {userAge}</div>
+        <div className='search-country'>
+          Country:{" "}
+          {userCountry &&
+            userCountry.map((countryCode, i) => (
+              <li key={i}>{countryCode.country_id}</li>
+            ))}
+        </div>
       </div>
     </div>
   );

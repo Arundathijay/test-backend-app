@@ -1,38 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: column;
+  font-family: "Nunito", sans-serif;
+  background-image: linear-gradient(90deg, #6f1eb1, #c8a4e5);
 }
-
-.App-link {
-  color: #61dafb;
+body {
+  padding: 0;
+  margin: 0;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search-form {
+  margin-top: 6em;
+  display: flex;
+}
+.search-info {
+  display: flex;
+  align-items: center;
+  padding: 4em auto;
+  margin-top: 2em;
+  color: rgb(28, 5, 105);
+}
+input {
+  width: 8em;
+  height: 1.5em;
+  font-size: 18px;
+  border-radius: 0.5em;
+  text-align: center;
+  border: 1px solid #e8e8e8;
+}
+.btn-submit {
+  padding: 0.3em 1.3em;
+  margin-left: 0.5em;
+  font-size: 18px;
+  border-radius: 0.5em;
+  background: #e8e8e8;
+  border: 1px solid #e8e8e8;
+}
+.search-name {
+  margin: 1em 3em;
+}
+.search-age {
+  margin: 1em 3em;
+}
+.search-country {
+  margin: 1em 3em;
 }
