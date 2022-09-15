@@ -2,64 +2,40 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 const Covid = () => {
-  const [items, setItems] = useState();
+  const [covidInfo, setCovidInfo] = useState();
 
+  // Fetch covid data when the component rendrs
   useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = () => {
     fetch("https://api.covidtracking.com/v2/us/daily.json")
       .then((res) => res.json())
-
       .then((response) => {
-        console.log(response);
-        setItems(response.data);
+        setCovidInfo(response.data);
       });
-  };
-
-  // async function getCovidData(e) {
-  //   e.preventDefault();
-
-  //   try {
-  //     const response = await axios.get(
-  //       "https://api.covidtracking.com/v2/us/daily.json"
-  //     );
-  //     console.log(response.data);
-  //     return response.data;
-
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-
-  //   console.log(await getCovidData());
-  // }
+  }, []);
 
   return (
     <div>
-      Covid
-      <div>
+      <h2>Covid Data of USA from 2020-01 to 2021-03</h2>
+      <table>
+        {/* display covid data in a table  */}
         <tbody>
           <tr>
+            <th>Date</th>
             <th>Cases</th>
             <th>Testing</th>
             <th>Deaths</th>
           </tr>
-          {items &&
-            items.map(
-              (item, i) =>
-                item.map((info, i) => {
-                  console.log(info);
-                })
-
-              // <tr key={i}>
-              //   <td>{item.cases.total.value}</td>
-              //   <td>{item.testing}</td>
-              //   <td>{item.death.total.value}</td>
-              // </tr>
-            )}
+          {covidInfo &&
+            covidInfo.map((item, i) => (
+              <tr key={i}>
+                <td>{item.date}</td>
+                <td>{item.cases.total.value}</td>
+                <td>{item.testing.total.value}</td>
+                <td>{item.outcomes.death.total.value}</td>
+              </tr>
+            ))}
         </tbody>
-      </div>
+      </table>
     </div>
   );
 };

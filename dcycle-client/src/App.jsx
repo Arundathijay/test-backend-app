@@ -11,17 +11,20 @@ function App() {
   const [genderProb, setUserGenderProb] = useState("");
   const [userCountry, setUserCountry] = useState([]);
 
-  const genderApi = `https://api.genderize.io/?name=${name}`;
-  const countryApi = `https://api.nationalize.io/?name=${name}`;
-  const ageApi = `https://api.agify.io/?name=${name}`;
+  //assign API urls
+  const genderApi = `https://api.genderize.io/?name=`;
+  const countryApi = `https://api.nationalize.io/?name=`;
+  const ageApi = `https://api.agify.io/?name=`;
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const requestOne = axios.get(`${genderApi}`);
-    const requestTwo = axios.get(`${countryApi}`);
-    const requestThree = axios.get(`${ageApi}`);
+    //get required data from each url using axios
+    const requestOne = axios.get(`${genderApi}${name}`);
+    const requestTwo = axios.get(`${countryApi}${name}`);
+    const requestThree = axios.get(`${ageApi}${name}`);
 
+    //use axios all to access all three APIs
     axios
       .all([requestOne, requestTwo, requestThree])
       .then(
@@ -30,7 +33,7 @@ function App() {
           const responseTwo = responses[1];
           const responesThree = responses[2];
 
-          // use/access the results
+          // access the results
           setUserGender(responseOne.data.gender);
           setUserGenderProb(responseOne.data.probability);
           setUserCountry(responseTwo.data.country);
@@ -44,31 +47,6 @@ function App() {
       });
   };
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`https://api.genderize.io/?name=${name}`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setName(data);
-  //       console.log(data);
-  //     });
-  // }, [name]);
-
-  // async function getName(e) {
-  //   e.preventDefault();
-
-  //   try {
-  //     const response = await axios.get(
-  //       `https://api.genderize.io/?name=${name}`
-  //     );
-  //     console.log(response.data);
-  //     return response.data;
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-
-  //   console.log(await getName());
-  // }
   return (
     <div className='App'>
       <div className='search-form'>
@@ -84,6 +62,8 @@ function App() {
           </button>
         </form>
       </div>
+      <h3>Predicted data from a given name</h3>
+      {/* display retrieved info from the APIs */}
       <div className='search-info'>
         <div className='search-name'>
           Gender: {userGender}
@@ -91,6 +71,7 @@ function App() {
         </div>
         <div className='search-age'>Age: {userAge}</div>
         <div className='search-country'>
+          {/* mapping through the country array to get probable countries */}
           Country:{" "}
           {userCountry &&
             userCountry.map((countryCode, i) => (
@@ -98,7 +79,10 @@ function App() {
             ))}
         </div>
       </div>
-      <Covid />
+      {/* Display the covid details table imported from the covid component */}
+      <div className='covid-info'>
+        <Covid />
+      </div>
     </div>
   );
 }

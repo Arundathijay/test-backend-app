@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
 .App {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -13,14 +13,19 @@ body {
   margin: 0;
 }
 .search-form {
-  margin-top: 6em;
+  margin-top: 3em;
   display: flex;
+}
+form {
+  margin: 3em 1em;
+  display: flex;
+  align-items: center;
 }
 .search-info {
   display: flex;
   align-items: center;
-  padding: 4em auto;
-  margin-top: 2em;
+  padding: 2em auto;
+  margin: 0 3em;
   color: rgb(28, 5, 105);
 }
 input {
@@ -30,6 +35,15 @@ input {
   border-radius: 0.5em;
   text-align: center;
   border: 1px solid #e8e8e8;
+}
+h2 {
+  font-size: 22px;
+  justify-content: center;
+  display: flex;
+}
+h3 {
+  font-size: 24px;
+  margin-bottom: 2em;
 }
 .btn-submit {
   padding: 0.3em 1.3em;
@@ -47,4 +61,19 @@ input {
 }
 .search-country {
   margin: 1em 3em;
+}
+.covid-info {
+  display: flex;
+  align-items: center;
+  margin-top: 4em;
+}
+table,
+th,
+td {
+  border: 1px solid;
+  padding: 1em 2em;
+}
+.covid-app {
+  display: flex;
+  align-items: center;
 }
