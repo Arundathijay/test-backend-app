@@ -2,23 +2,25 @@ import { useState } from "react";
 import React from "react";
 import "./App.css";
 import axios from "axios";
+import Covid from "./Covid";
 
 function App() {
   const [name, setName] = useState([]);
-  const [userName, setUserName] = useState("");
+  const [userGender, setUserGender] = useState("");
   const [userAge, setUserAge] = useState("");
+  const [genderProb, setUserGenderProb] = useState("");
   const [userCountry, setUserCountry] = useState([]);
 
-  const nameApi = `https://api.genderize.io/?name=${name}`;
+  const genderApi = `https://api.genderize.io/?name=${name}`;
   const countryApi = `https://api.nationalize.io/?name=${name}`;
   const ageApi = `https://api.agify.io/?name=${name}`;
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const requestOne = axios.get(`${nameApi}`);
-    const requestTwo = axios.get(`${countryApi}${name}`);
-    const requestThree = axios.get(`${ageApi}${name}`);
+    const requestOne = axios.get(`${genderApi}`);
+    const requestTwo = axios.get(`${countryApi}`);
+    const requestThree = axios.get(`${ageApi}`);
 
     axios
       .all([requestOne, requestTwo, requestThree])
@@ -29,7 +31,8 @@ function App() {
           const responesThree = responses[2];
 
           // use/access the results
-          setUserName(responseOne.data.name);
+          setUserGender(responseOne.data.gender);
+          setUserGenderProb(responseOne.data.probability);
           setUserCountry(responseTwo.data.country);
           setUserAge(responesThree.data.age);
           console.log(responseOne, responseTwo, responesThree);
@@ -73,6 +76,7 @@ function App() {
           <input
             type='text'
             value={name}
+            placeholder='name'
             onChange={(e) => setName(e.target.value)}
           />
           <button className='btn-submit' type='submit'>
@@ -81,7 +85,10 @@ function App() {
         </form>
       </div>
       <div className='search-info'>
-        <div className='search-name'>Name: {userName}</div>
+        <div className='search-name'>
+          Gender: {userGender}
+          <div>Gender probability: {genderProb}</div>
+        </div>
         <div className='search-age'>Age: {userAge}</div>
         <div className='search-country'>
           Country:{" "}
@@ -91,6 +98,7 @@ function App() {
             ))}
         </div>
       </div>
+      <Covid />
     </div>
   );
 }
